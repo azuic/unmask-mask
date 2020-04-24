@@ -3,8 +3,8 @@
     <svg ref="container" :width="width" :height="height" >
       <circle :r="radius" :cx="width/2" :cy="height/2" fill="none" stroke="black" stroke-width="0.5" />
       <g v-for="(yr,i) in years">
-        <circle r="5" :cx="width/2 +radius*Math.sin(i*angle(yr))" :cy="height/2+radius*Math.cos(i*angle(yr))" fill="#A6330A"/>
-        <text :x="width/2 + (radius+25)*Math.sin(i*angle(yr))" :y="height/2 + (radius+25)*Math.cos(i*angle(yr))" fill="black">
+        <circle r="5" :cx="width/2 +radius*Math.cos(angle(yr))" :cy="height/2+radius*Math.sin(angle(yr))" fill="#A6330A"/>
+        <text :x="width/2 + (radius+25)*Math.cos(angle(yr))-10" :y="height/2 + (radius+25)*Math.sin(angle(yr))" fill="black">
           {{yr}}
         </text>
       </g>
@@ -29,15 +29,15 @@
     methods: {
       angle(year) {
         const nArcs = (2020 - 1975) / 5 + 2;
-        const startAngle = Math.PI / 180;
-        const oneArc = (2 * Math.PI - 2 * startAngle) / nArcs;
-        const unitAngle = (2 * Math.PI - 2 * startAngle - 2*oneArc)/(2020-1975)
+        const startAngle = -5/12*Math.PI;
+        const oneArc = Math.PI / 6;
+        const unitAngle = oneArc / 5;
         if (year === 1723) {
-          return -Math.PI/2+startAngle;
+          return startAngle;
         } else if (year === 1845) {
-          return-Math.PI/2+startAngle+oneArc;
+          return startAngle+oneArc;
         } else {
-          return Math.PI-startAngle + 2 * oneArc + (year - 1975) * unitAngle;
+          return startAngle + 2 * oneArc + (year - 1975) * unitAngle;
         }
       },
       circleSize(year) {
