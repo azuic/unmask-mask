@@ -1,4 +1,6 @@
-Unmask Masks  
+Unmasking Masks  
+#### Uncovering global attitudes towards masks
 -------------
-###### Zui Chen MS Data Visualization Thesis '2020 
+##### Parsons School of Design MS Data Visualization Thesis '2020
+###### Zui Chen 
 ![](./preview.png)
