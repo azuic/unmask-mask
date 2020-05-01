@@ -2,68 +2,55 @@
   <div>
     <div class="bg">
       <div class="mask"></div>
-      <div class="slide-cover">
-        <div class="slide-arrow"></div>
+      <div class="slide-cover" :style="maskStyle">
+        <div class="slide-arrow"
+              @mouseover="slideLeft = true"
+              ></div>
       </div>
       <h1 class="title">
-        Unmask Masks
+        <span id="title-unmask">unmask</span><span id="title-ing">ing</span>
+        <br><span id="title-masks">masks</span>
       </h1>
-
+    <div class="nextButton">
+      <n-link to="/timeline">Next</n-link>
+    </div>
     </div>
   </div>
 </template>
 
 <script>
-/*  export default {
-    mounted() {
-      // Make the DIV element draggable:
-      slideLeft(document.getElementById("slide-cover"));
-
-      function slideLeft(elem) {
-        var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
-        if (document.getElementById("slide-arrow")) {
-          // if present, the header is where you move the DIV from:
-          document.getElementById("slide-arrow").onmousedown = dragMouseDown;
-        } else {
-          // otherwise, move the DIV from anywhere inside the DIV:
-          elem.onmousedown = dragMouseDown;
-        }
-
-        function dragMouseDown(e) {
-          e = e || window.event;
-          e.preventDefault();
-          // get the mouse cursor position at startup:
-          pos3 = e.clientX;
-          pos4 = e.clientY;
-          document.onmouseup = closeDragElement;
-          // call a function whenever the cursor moves:
-          document.onmousemove = elementDrag;
-        }
-
-        function elementDrag(e) {
-          e = e || window.event;
-          e.preventDefault();
-          // calculate the new cursor position:
-          pos1 = pos3 - e.clientX;
-          pos2 = pos4 - e.clientY;
-          pos3 = e.clientX;
-          pos4 = e.clientY;
-          // set the element's new position:
-          elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
-        }
-
-
+export default{
+  data(){
+    return {
+      slideLeft: false,
+      maskStyle:{
+        marginLeft: "50vw",
+        transition: "0.2s"
       }
     }
-  }*/
-
+  },
+  watch:{
+    slideLeft(val, oldVal){
+      if (this.slideLeft){
+        this.maskStyle.marginLeft = "100vw"
+      } else {
+        this.maskStyle.marginLeft = "50vw"
+      }
+    }
+  }
+}
 </script>
 
 <style>
- body{
+@font-face {
+  font-family: 'Garamond',cursive;
+  src: url('/Garamond.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+body{
     overflow-x:hidden;
-    
-    
+    font-family: 'Garamond';
     background-repeat: no-repeat;
  }
 .bg {
@@ -85,30 +72,62 @@
   margin-left:50vw;
   display: block;
   background: black;
-  z-index:10;
+  z-index:5;
 }
 
 .slide-arrow{
   width:50px;
   height:50px;
-  background-image:url('/swipe.gif');
+  background-image:url('/slide.svg');
   background-size: contain;
   background-repeat: no-repeat;
-  margin-left:0;
-  margin-top: 50vh;
+  margin-left:-25px;
+  margin-top: 80vh;
 }
 .title {
   position:absolute;
-  font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-family:  'Garamond';
   display: block;
-  font-weight: 300;
+  font-weight: 600;
   font-size: 100px;
   color: black;
   letter-spacing: 1px;
-  z-index:5;
-  margin:40vh 25vw;
-  
+  line-height: 80px;
+  z-index:10;
+  margin-top: 45vh;
 }
 
+#title-unmask{
+  margin-left: 32vw;
+
+}
+
+#title-ing{
+  color: white;
+}
+
+#title-masks{
+  /* color: white; */
+  margin-left: 50vw;
+}
+.nextButton{
+  display:inline-block;
+  position:absolute;
+  background: #FBDD4A;
+  color: black;
+  font-family:  'Garamond';
+  /* white-space: nowrap; */
+  margin-top: 90vh;
+  margin-left:90vw;
+  z-index:1;
+}
+
+n-link{
+  position: absolute;
+  font-family:  'Garamond';
+  padding: 5px;
+  font-weight: 600;
+  font-size:30px;
+  z-index:1;
+}
 </style>
