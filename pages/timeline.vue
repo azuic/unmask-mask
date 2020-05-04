@@ -1,9 +1,25 @@
 <template>
   <div>
   <div class="timeline-mask" :style="slideStyle">
-  <span class="pro-title" v-on:click="slideRight">pro</span>
-  <span class="anti-title" v-on:click="slideLeft">anti</span>
+    <div id="title">
+    <div id="pro-title" v-on:click="slideRight">
+      <span class="title-text"  @mouseover="hoverPro" @mouseleave="hoverPro">pro</span>
+      <img class="direction" src="/direction.png" width="50px"
+            v-show="proActive&&!sectionDisplayed" :style="directionTranslate"/>
+    </div>
+    <div id="anti-title" v-on:click="slideLeft">
+      <img class="direction" src="/direction.png" width="50px"
+            v-show="antiActive&&!sectionDisplayed" :style="directionTranslate"/>
+      <span class="title-text"  @mouseover="hoverAnti" @mouseleave="hoverAnti">anti</span>
+    </div>
+    </div>
+
   </div>
+  <div v-if="sectionDisplayed"
+        class="back" width="50px"
+        :style="backStyle"
+        v-on:click="slideCenter"
+        ></div>
   <div class="container">
     <svg  class="timeline" ref="timeline" :width="width" :height="height" viewBox="0 0 1000 1000" preserveAspectRatio="xMidYMid meet">
       <svg ref="circle" :x="offsetX" :y="offsetY" :width="radius*2" :height="radius*2" viewBox="0 0 1003 1003" fill="none" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
@@ -11,24 +27,38 @@
       <path d="M631.41 18.0371C716.187 40.7532 793.492 85.385 855.553 147.447C917.615 209.508 962.247 286.813 984.963 371.59" stroke="black" stroke-width="4" stroke-dasharray="5 7"/>
       <path d="M984.963 371.59C1011.52 470.704 1006.94 575.588 971.846 672.01C936.752 768.432 872.841 851.721 788.788 910.576C704.735 969.431 604.61 1001 502 1001C399.39 1001 299.265 969.431 215.212 910.576C131.159 851.721 67.2483 768.432 32.1537 672.01C-2.94094 575.588 -7.52028 470.704 19.0371 371.59C45.5945 272.477 102.003 183.934 180.606 117.978C259.21 52.0214 356.203 11.8457 458.422 2.90264" stroke="black" stroke-width="4"/>
       </svg>
-      <!-- <circle :r="radius" :cx="width/2" :cy="height/2" fill="none" stroke="black" stroke-width="0.5" /> -->
       <g>
+        <defs>
+          <filter x="0" y="0" width="1" height="1" id="bg-text">
+            <feFlood :flood-color="fillColor"/>
+            <feComposite in="SourceGraphic" operator="xor" />
+          </filter>
+        </defs>
       <g v-for="yr in years" :key="yr">
-        <circle v-on:click="selectYear=yr" r="5" :cx="offsetX + radius + radius*Math.cos(angle(yr))" :cy="offsetY + radius + radius*Math.sin(angle(yr))" :fill="fillColor"/>
-        <text :x="offsetX + radius + (radius+25)*Math.cos(angle(yr))-17" :y="offsetY + radius + (radius+25)*Math.sin(angle(yr))+5" :fill="ifSelected?fillColor:black">
+        <circle v-on:click="selectYear=yr" r="8" :cx="offsetX + radius + radius*Math.cos(angle(yr))" :cy="offsetY + radius + radius*Math.sin(angle(yr))" :fill="fillColor"/>
+        <rect :x="offsetX + radius + (radius+35)*Math.cos(angle(yr))-22-1-2"
+              :y="offsetY + radius + (radius+35)*Math.sin(angle(yr))+7-15-2"
+              width="46"
+              height="22"
+              v-if="selectYear===yr"
+              :fill="fillColor">
+        </rect>
+        <text :x="offsetX + radius + (radius+35)*Math.cos(angle(yr))-22"
+              :y="offsetY + radius + (radius+35)*Math.sin(angle(yr))+7"
+              :fill="(selectYear===yr)?'#fff':'#000'"
+              font-size="22">
           {{yr}}
         </text>
       </g>
-    </g>
+      </g>
     </svg>
     <div :style="showDetails" class="details">
       <span class="stateName" :style="{'color':fillColor}">{{details.state}}</span>
       <br><br>
-      <!-- <span class="law">9 George 1 c.22: <span class="highlight">The Black Act</span> - An act for the more effectual punishing <span class="highlight">wicked and evil-disposed</span> persons going <span class="highlight">armed in disguise</span>, and doing injuries and violences to the persons and properties of his Majesty’s subjects, and for the more speedy bringing the offenders to justice.</span> -->
-      <div class="law">{{details.law}}</div>
-      <br><br>
-      <!-- <span class="context">In response to a series of raids by <span class="highlight">two groups of poachers</span>, known as the Blacks.</span> -->
-      <div class="context">{{details.context}}</div>
+      <div class="text-info">
+      <div id="law">{{details.law}}</div>
+      <div id="context">{{details.context}}</div>
+      </div>
     </div>
   </div>
 
@@ -44,6 +74,16 @@
   export default {
     data() {
       return {
+        backStyle:{
+          marginLeft:"0",
+          transform: "scaleX(1)"
+        },
+        sectionDisplayed: false,
+        directionTranslate:{
+          transform: "translate(0,10px)"
+        },
+        proActive: false,
+        antiActive: false,
         proAnti:"",
         slide: "center",
         slideStyle:{
@@ -56,9 +96,8 @@
         offsetX:200,
         offsetY:120,
         height: 1000,
-        width: 1000,
-        radius: 300,
-        // years: []
+        width: 1200,
+        radius: 400,
         selectYear:null,
         years: [],
         details:{
@@ -76,12 +115,24 @@
           this.slideStyle.marginLeft="80vw";
           this.fillColor="#544E70";
           this.details.state="Global Pro Mask Policies";
+          this.proActive=true;
+          this.sectionDisplayed=true;
+          this.backStyle= {
+            marginLeft:"80vw",
+            transform: "scaleX(1)"};
         } else if (val==="left"){
           this.slideStyle.marginLeft="-80vw";
           this.fillColor="#A6330A";
-          this.details.state="Global Anti Mask Policies";
+          this.details.state="Global Anti Mask Laws";
+          this.antiActive=true;
+          this.sectionDisplayed=true;
+          this.backStyle= {
+            marginLeft:"15vw",
+            transform: "scaleX(-1)"};
         } else {
           this.slideStyle.marginLeft="0";
+          this.notCenter = true;
+          this.sectionDisplayed=false;
         }
       },
       selectYear(val, oldVal){
@@ -92,13 +143,27 @@
       }
     },
     methods: {
+      hoverAnti(){
+        this.antiActive = !this.antiActive;
+        this.directionTranslate.transform = "translate(0,10px) scaleX(1)"
+      },
+      hoverPro(){
+        this.proActive = !this.proActive;
+        this.directionTranslate.transform = "translate(0,10px) scaleX(-1)"
+      },
+      slideCenter(){
+        this.slide="center";
+        this.sectionDisplayed=false;
+      },
       slideRight(){
         this.slide = "right";
         this.years = [2002,2009,2020];
+        this.sectionDisplayed=true;
       },
       slideLeft(){
         this.slide = "left";
         this.years = anti_mask_laws.map(({year, content})=>year)
+        this.sectionDisplayed=true;
       },
       angle(year) {
         const nArcs = (2020 - 1975) / 5 + 2;
@@ -142,71 +207,86 @@ body{
   font-weight: 600;
 }
 .timeline-mask{
-  position: relative;
+  position: absolute;
   width:100vw;
   height: 100vh;
-  margin-top:0;
-  margin-left:0;
+
   display: block;
   background: #FBDD4A;
   z-index:25;
+
+  font-family:  'Garamond';
+  font-weight: 600;
+  font-size: 100px;
+
+}
+.title-text{
+  border-bottom-width: 10px;
+  border-bottom-style: solid;
+  padding-bottom: 7px;
+  /* margin-top: 40vh; */
+}
+#title{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+}
+#pro-title {
+  width: 50vw;
+  height: 100vh;
+  text-align: left;
+  color: black;
+  background-color: white;
+  align-self: center;
+  padding-top: 40vh;
+  padding-left: 7vw;
+}
+#anti-title {
+  width: 50vw;
+  height: 100vh;
+  text-align: right;
+  color: white;
+  background-color: black;
+  padding-top: 40vh;
+  padding-right: 10vw;
 }
 
-.pro-title {
-  position:absolute;
-  font-family:  'Garamond';
+.back{
+  position: absolute;
   display: block;
-  font-weight: 600;
-  font-size: 100px;
-  color: white;
-  letter-spacing: 1px;
-  line-height: 80px;
-  z-index:10;
-  margin-top: 40vh;
-  margin-left: 10vh;
-  border-bottom-width: 10px;
-  border-bottom-style: solid;
-  padding-bottom: 7px
-}
-.anti-title {
-  position:absolute;
-  font-family:  'Garamond';
-  display: block;
-  font-weight: 600;
-  font-size: 100px;
-  color: black;
-  letter-spacing: 1px;
-  line-height: 80px;
-  z-index:10;
-  margin-top: 40vh;
-  margin-left: 80vw;
-  border-bottom-width: 10px;
-  border-bottom-style: solid;
-  padding-bottom: 7px
-  /* margin-right:80vw; */
+  width: 80px;
+  height: 80px;
+  background-image: url("/direction.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  z-index: 50;
+  margin-top: 43vh;
 }
   .container{
-    /* position:fixed; */
-    display: flex;
+    position:absolute;
+    display: block;
+    width: 100vw;
+    height:100vh;
     justify-content: center;
     align-items: center;
-    margin-top: -40vh;
-    /* z-index: 0; */
+    margin-top: 0;
+    /* z-index: 20; */
   }
 
   .timeline{
     position: absolute;
     margin-top:0;
+    margin-left: 13vw;
     z-index:0;
   }
 
   .details{
     position: absolute;
     display: block;
-    margin-left: 10px;
-    margin-top: -90px;
-    width: 500px;
-    height: 300px;
+    margin-left: 34vw;
+    margin-top: 350px;
+    width: 60vw;
+    /* height: 300px; */
     z-index:5
   }
   .highlight{
@@ -214,25 +294,31 @@ body{
     color: white;
   }
   .stateName{
-    font-size: 20px;
+    font-size: 28px;
     color: #A6330A;
     /* text-decoration: underline; */
     border-bottom-width: 4px;
     border-bottom-style: solid;
     padding-bottom: 3px
   }
-  .law{
-    display: inline-block;
-    font-size: 18px;
-    line-height: 27px;
+  .text-info{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 150px;
   }
-  .context{
+  #law{
+    /* display: block; */
+    font-size: 22px;
+    line-height: 33px;
+    width: 620px;
+  }
+  #context{
     font-size: 18px;
     line-height: 27px;
-    display: inline-block;
+    display: block;
     width: 300px;
-    margin-top: -500px;
-    margin-left: 620px;
+    padding-top: 70px;
+
   }
   .nextButton{
     display:inline-block;
@@ -240,9 +326,6 @@ body{
     background: #FBDD4A;
     color: black;
     font-family:  'Garamond';
-    /* white-space: nowrap; */
-    /* x: 90vh;
-    y:90vw; */
     margin-top: 200px;
     margin-left: 90vw;
     z-index:15;

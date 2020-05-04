@@ -1,7 +1,7 @@
 <template>
   <div>
 
-    <LineChart :selectedStartDate="pickStartDate"/>
+    <LineChart id="volume-line-chart" :selectedStartDate="pickStartDate"/>
     <div class="date-range" style="margin-top: 20px">
       <el-radio-group v-model="pickStartDate" size="medium" @change="newStartDate">
         <el-radio-button label="Since 2017"></el-radio-button>
@@ -38,6 +38,10 @@
 </script>
 
 <style>
+#volume-line-chart{
+  margin-top: 10vh;
+}
+
   .date-range{
     display: flex;
     justify-content: center;

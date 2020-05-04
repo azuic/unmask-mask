@@ -23,8 +23,8 @@
           right: 50,
           bottom: 50
         },
-        height: 600,
-        width: 1000,
+        height: 800,
+        width: 1500,
 
       }
     },
@@ -100,7 +100,7 @@
         svg.append("path")
             .datum(data)
             .attr("fill", "none")
-            .attr("stroke", "black")
+            .attr("stroke", "black ")
             .attr("stroke-width", 1.5)
             .attr("stroke-linejoin", "round")
             .attr("stroke-linecap", "round")
