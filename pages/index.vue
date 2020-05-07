@@ -73,7 +73,7 @@ export default{
   font-style: normal;
 }
 body{
-    overflow-x:hidden;
+    overflow:hidden;
     font-family: 'Garamond';
     background-repeat: no-repeat;
  }
