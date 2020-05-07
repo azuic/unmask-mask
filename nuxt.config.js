@@ -6,7 +6,8 @@
 export default {
   mode: 'spa',
   router: {
-    base: 'https://github.com/azuic/unmasking-masks/'
+    base: 'https://github.com/azuic/unmasking-masks/',
+    mode: 'hash'
   },
   /*
   ** Headers of the page
