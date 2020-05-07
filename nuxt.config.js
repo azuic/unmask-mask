@@ -1,6 +1,12 @@
-
+// only add `router.base = '/<repository-name>/'` if `DEPLOY_ENV` is `GH_PAGES`
+const routerBase = process.env.DEPLOY_ENV === 'GH_PAGES' ? {
+  router: {
+    base: 'https://github.com/azuic/unmasking-masks'
+  }
+} : {}
 export default {
   mode: 'spa',
+  ...routerBase,
   /*
   ** Headers of the page
   */

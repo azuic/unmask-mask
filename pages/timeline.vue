@@ -116,7 +116,7 @@
         years: [],
         details:{
           state:"",
-          law:"Click on each <span class=\"highlight\" :style=\"{\'background-color\':fillColor}\">circle/year</span> to see details",
+          law:"Click on each <span class=\"highlight\" style=\"background-color:#FBDD4A\">circle/year</span> to see details",
           context:""
         },
         ifSelected: false,
