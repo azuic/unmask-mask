@@ -82,7 +82,7 @@ body{
   position: absolute;
   width: 100vw;
   height: 100vh;
-  background-image: url('~/static/mask-front.png');
+  background-image: url('/static/mask-front.png');
   background-size: contain;
   background-position:center;
   background-repeat: no-repeat;
@@ -134,7 +134,7 @@ body{
   position: absolute;
   width:50px;
   height:50px;
-  background-image:url('~/static/direction.png');
+  background-image:url('/static/direction.png');
   /* mix-blend-mode: hue; */
   background-size: contain;
   background-repeat: no-repeat;

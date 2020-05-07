@@ -33,7 +33,7 @@ export default {
 }
 
 .next-button:hover{
-  background-image:url('~/static/turnRight.gif');
+  background-image:url('/static/turnRight.gif');
   background-size: 120% 120%;
   background-position: 50% 50%;
   background-repeat: no-repeat;

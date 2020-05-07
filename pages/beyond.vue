@@ -79,7 +79,7 @@ body{
   position: absolute;
   width: 100vw;
   height: 100vh;
-  background-image: url('~/static/b.png');
+  background-image: url('/static/b.png');
   background-size: 150% auto;
   background-repeat: no-repeat;
   background-position: 50% 50%;
