@@ -33,7 +33,7 @@ export default {
 }
 
 .back-button:hover{
-  background-image:url('./turnLeft.gif');
+  background-image:url('~/static/turnLeft.gif');
   background-size: 120% 120%;
   background-position: 50% 50%;
   background-repeat: no-repeat;

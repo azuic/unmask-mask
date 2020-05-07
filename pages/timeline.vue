@@ -392,11 +392,11 @@ body{
     height:800px;
   }
   .left{
-    shape-outside: url('./ExcludeL.png');
+    shape-outside: url('~/static/ExcludeL.png');
     float: left;
   }
   .right{
-    shape-outside: url('./ExcludeR.png');
+    shape-outside: url('~/static/ExcludeR.png');
     float: right;
   }
   #law{
