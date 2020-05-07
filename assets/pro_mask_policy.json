@@ -1,0 +1,22 @@
+[{
+  "year": 2002,
+  "content": [{
+    "state": "SARS",
+    "law": "",
+    "context": ""
+  }]
+},  {
+    "year": 2009,
+    "content": [{
+      "state": "H1N1",
+      "law": "",
+      "context": ""
+    }]
+  },  {
+      "year": 2020,
+      "content": [{
+        "state": "Covid-19",
+        "law": "<span class=\"hightlight\" style=\"background-color:#544E70;\">63 states</span> require/recommend residents to cover their faces when they go out in public or use public transportation - United States: Connecticut, Hawaii, Maryland, New Jersey, New York, Pennsylvania, Rhode Island;  Argentina; Austria; Bahamas; Bahrain; Benin; Bosnia and Herzegovina; Bulgaria; Cambodia; Cameroon; Canada; Chile; China; Colombia; Cuba; Czech Republic; DR Congo; Ecuador; Ethiopia; France; Gabon; Germany; Guinea; Hoduras; Hong Kong; India; Indonesia; Israel; Italy; Ivory Coast; Japan; Kenya; Liberia; Lituania; Luxembourg; Malaysia; Mexico; Mongolia; Morocco; Mozambique; North Macedonia; Pakistan; Panama; Peru; Philippines; Poland; Russia; Rwanda; Scotland; Singapore; Spain; Slovakia; Slovenia; South Africa; South Korea; Sweden; Taiwan; Turkey; Ukraine; Uzbekistan; Venezuela; Vietnam; Zambia.",
+        "context": ""
+      }]
+    }]

@@ -1,15 +1,18 @@
 <template>
-  <div>
-
+  <div class="bg-container">
+    <!-- <div class="mask-back"></div> -->
     <LineChart id="volume-line-chart" :selectedStartDate="pickStartDate"/>
-    <div class="date-range" style="margin-top: 20px">
+    <div class="date-range">
       <el-radio-group v-model="pickStartDate" size="medium" @change="newStartDate">
         <el-radio-button label="Since 2017"></el-radio-button>
         <el-radio-button label="Since 2018"></el-radio-button>
-        <el-radio-button label="Since 2019"></el-radio-button>
-        <el-radio-button label="Since 2020"></el-radio-button>
+        <el-radio-button label="Since 2019 Hongkong Protest"></el-radio-button>
+        <el-radio-button label="Since Covid-19"></el-radio-button>
       </el-radio-group>
     </div>
+    <BackButton routerLink="/" />
+    <NextButton routerLink="/timeline" />
+    <div id="trend-title"><span style="background-color:#FBDD4A">online news</span> mentioning masks</div>
   </div>
 
 
@@ -17,9 +20,11 @@
 
 <script>
   import LineChart from '~/components/LineChart.vue'
+  import BackButton from '~/components/BackButton.vue'
+  import NextButton from '~/components/NextButton.vue'
   export default {
     components: {
-      LineChart
+      LineChart, BackButton,NextButton
     },
     data(){
       return{
@@ -38,14 +43,73 @@
 </script>
 
 <style>
+html,body{
+  overflow:hidden;
+}
+#trend-title{
+  display: block;
+  position: absolute;
+  width: 530px;
+  font-size: 40px;
+  /* background-color: #FBDD4A; */
+  border-color:#FBDD4A;
+  border-bottom-width: 10px;
+  border-bottom-style: solid;
+  padding-bottom: 7px;
+  margin-top: 80vh;
+  margin-left: 10vw;
+  font-weight:700;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+.bg-container{
+  background-image: url('/b.png');
+  background-size: 150% auto;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  width:100vw;
+  height: 100vh;
+}
+.mask-back{
+  display:block;
+  position:absolute;
+  z-index:-1;
+  background-image: url('/b.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 800px;
+  height: 800px;
+  /* margin-left:250px; */
+}
+
+.next-button{
+  position: absolute;
+  z-index: 55;
+  margin-top:5vh;
+  margin-left:51vw;
+}
+.back-button{
+  position: absolute;
+  z-index: 55;
+  margin-top:5vh;
+  margin-left:44vw;
+}
+
 #volume-line-chart{
+  display: block;
+  position: absolute;
+  z-index: 2;
   margin-top: 10vh;
+  margin-left: 8vw;
+  width: 80vw;
 }
 
   .date-range{
-    display: flex;
-    justify-content: center;
-
+    position: absolute;
+    display: block;
+    margin-left: 60vw;
+    margin-top: 85vh;
+    z-index:50;
   }
 
   .el-radio-button__inner {

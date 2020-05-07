@@ -4,7 +4,7 @@
     <div id="title">
     <div id="pro-title" v-on:click="slideRight">
       <span class="title-text"  @mouseover="hoverPro" @mouseleave="hoverPro">pro</span>
-      <img class="direction" src="/direction.png" width="50px"
+      <img class="direction" src="/direction-w.png" width="50px"
             v-show="proActive&&!sectionDisplayed" :style="directionTranslate"/>
     </div>
     <div id="anti-title" v-on:click="slideLeft">
@@ -35,7 +35,8 @@
           </filter>
         </defs>
       <g v-for="yr in years" :key="yr">
-        <circle v-on:click="selectYear=yr" r="8" :cx="offsetX + radius + radius*Math.cos(angle(yr))" :cy="offsetY + radius + radius*Math.sin(angle(yr))" :fill="fillColor"/>
+        <g v-on:click="selectYear=yr">
+        <circle  r="8" :cx="offsetX + radius + radius*Math.cos(angle(yr))" :cy="offsetY + radius + radius*Math.sin(angle(yr))" :fill="fillColor"/>
         <rect :x="offsetX + radius + (radius+35)*Math.cos(angle(yr))-22-1-2"
               :y="offsetY + radius + (radius+35)*Math.sin(angle(yr))+7-15-2"
               width="46"
@@ -51,27 +52,40 @@
         </text>
       </g>
       </g>
+      </g>
     </svg>
     <div :style="showDetails" class="details">
       <span class="stateName" :style="{'color':fillColor}">{{details.state}}</span>
       <br><br>
       <div class="text-info">
-      <div id="law">{{details.law}}</div>
-      <div id="context">{{details.context}}</div>
+      <!-- <div id="context" v-html="details.context"></div> -->
+      <div id="law">
+        <div class="left"></div>
+        <div class="right"></div>
+        <p v-html="details.law"></p>
+      </div>
+      <div id="context" v-html="details.context"></div>
       </div>
     </div>
   </div>
 
-  <div class="nextButton">
-    <n-link to="/trend">Next</n-link>
-  </div>
+  <BackButton routerLink="/trend" v-show="!sectionDisplayed"/>
+  <NextButton routerLink="/beyond" v-show="!sectionDisplayed"/>
+
+  <div id="timeline-title" v-show="!sectionDisplayed"><span style="background-color:#FFF">laws and policies</span> about masks</div>
 </div>
 
 </template>
 
 <script>
-  import anti_mask_laws from "~/assets/anti_mask_laws.json"
+  import anti_mask_laws from "~/assets/anti_mask_laws.json";
+  import pro_mask_policy from "~/assets/pro_mask_policy.json";
+  import BackButton from '~/components/BackButton.vue'
+  import NextButton from '~/components/NextButton.vue'
   export default {
+    components: {
+      BackButton,NextButton
+    },
     data() {
       return {
         backStyle:{
@@ -102,7 +116,7 @@
         years: [],
         details:{
           state:"",
-          law:"",
+          law:"Click on each <span class=\"highlight\" :style=\"{\'background-color\':fillColor}\">circle/year</span> to see details",
           context:""
         },
         ifSelected: false,
@@ -133,11 +147,21 @@
           this.slideStyle.marginLeft="0";
           this.notCenter = true;
           this.sectionDisplayed=false;
+          this.details={
+            state:"",
+            law:"",
+            context:""
+          };
         }
       },
       selectYear(val, oldVal){
         console.log(val);
-        this.details = anti_mask_laws.filter(yearData=>(yearData.year==val))[0].content[0];
+        if (this.slide==="left"){
+          this.details = anti_mask_laws.filter(yearData=>(yearData.year==val))[0].content[0];
+        } else if (this.slide==="right"){
+          this.details = pro_mask_policy.filter(yearData=>(yearData.year==val))[0].content[0];
+        }
+
         console.log(this.details[0]);
         this.isSelected=true;
       }
@@ -157,12 +181,12 @@
       },
       slideRight(){
         this.slide = "right";
-        this.years = [2002,2009,2020];
+        this.years = pro_mask_policy.map(({year, content})=>year);
         this.sectionDisplayed=true;
       },
       slideLeft(){
         this.slide = "left";
-        this.years = anti_mask_laws.map(({year, content})=>year)
+        this.years = anti_mask_laws.map(({year, content})=>year);
         this.sectionDisplayed=true;
       },
       angle(year) {
@@ -206,6 +230,38 @@ body{
   font-family: 'Garamond';
   font-weight: 600;
 }
+#timeline-title{
+  display: block;
+  position: absolute;
+  z-index:90;
+  width: 530px;
+  font-size: 40px;
+  /* background-color: #FBDD4A; */
+  border-color:#FFF;
+  border-bottom-width: 10px;
+  border-bottom-style: solid;
+  padding-bottom: 7px;
+  margin-top: 45vh;
+  margin-left: 38vw;
+  font-weight:700;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+.next-button{
+  position: absolute;
+  z-index: 55;
+  margin-top:5vh;
+  margin-left:51vw;
+}
+.next-button.a{
+  color:white;
+}
+.back-button{
+  position: absolute;
+  z-index: 55;
+  margin-top:5vh;
+  margin-left:44vw;
+}
 .timeline-mask{
   position: absolute;
   width:100vw;
@@ -214,13 +270,16 @@ body{
   display: block;
   background: #FBDD4A;
   z-index:25;
-
   font-family:  'Garamond';
   font-weight: 600;
   font-size: 100px;
-
+  background-image: url('/b.png');
+  background-size: 150% auto;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-blend-mode: multiply;
 }
-.title-text{
+.title-text:hover{
   border-bottom-width: 10px;
   border-bottom-style: solid;
   padding-bottom: 7px;
@@ -235,8 +294,8 @@ body{
   width: 50vw;
   height: 100vh;
   text-align: left;
-  color: black;
-  background-color: white;
+  color: white;
+  /* background-color: white; */
   align-self: center;
   padding-top: 40vh;
   padding-left: 7vw;
@@ -245,12 +304,15 @@ body{
   width: 50vw;
   height: 100vh;
   text-align: right;
-  color: white;
-  background-color: black;
+  color: black;
+  /* background-color: black; */
   padding-top: 40vh;
   padding-right: 10vw;
-}
 
+}
+#anti-title .title-text{
+  text-decoration:line-through;
+}
 .back{
   position: absolute;
   display: block;
@@ -261,6 +323,24 @@ body{
   background-repeat: no-repeat;
   z-index: 50;
   margin-top: 43vh;
+  -webkit-animation: reduce 1s ease-in-out 0s infinite alternate ;
+  animation: reduce 1s ease-in-out 0s infinite alternate ;
+}
+@-webkit-keyframes reduce{
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0.3;
+    }
+}
+@keyframes reduce{
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0.3;
+  }
 }
   .container{
     position:absolute;
@@ -277,17 +357,17 @@ body{
     position: absolute;
     margin-top:0;
     margin-left: 13vw;
-    z-index:0;
+    z-index:2;
   }
 
   .details{
     position: absolute;
     display: block;
-    margin-left: 34vw;
-    margin-top: 350px;
-    width: 60vw;
+    margin-left: 600px;
+    margin-top: 270px;
+    width: 600px;
     /* height: 300px; */
-    z-index:5
+    z-index:1;
   }
   .highlight{
     background-color: #A6330A;
@@ -299,18 +379,32 @@ body{
     /* text-decoration: underline; */
     border-bottom-width: 4px;
     border-bottom-style: solid;
-    padding-bottom: 3px
+    padding-bottom: 3px;
+    margin-left: 100px;
   }
   .text-info{
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-gap: 150px;
+    grid-gap: 120px;
+  }
+  .left, .right{
+    width:200px;
+    height:800px;
+  }
+  .left{
+    shape-outside: url('/ExcludeL.png');
+    float: left;
+  }
+  .right{
+    shape-outside: url('/ExcludeR.png');
+    float: right;
   }
   #law{
     /* display: block; */
     font-size: 22px;
     line-height: 33px;
-    width: 620px;
+    width: 740px;
+
   }
   #context{
     font-size: 18px;
@@ -332,7 +426,7 @@ body{
   }
 
 
-  n-link{
+  a{
     font-family:  'Garamond';
     padding: 5px;
     font-weight: 600;

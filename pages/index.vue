@@ -1,34 +1,49 @@
 <template>
   <div>
     <div class="bg">
-      <div class="mask"></div>
-      <div class="slide-cover" :style="maskStyle">
-        <div class="slide-arrow"
-              @mouseover="slideLeft = true"
-              ></div>
-      </div>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 1062">
+        <defs>
+          <clipPath id="cut-off">
+                <path id="Exclusion_1" data-name="Exclusion 1" d="M1920.5,1080.5H.5V.5h1920v1080ZM437.834,508.259V611.384H960.5V490.061l-32.482,18.2-41.341-33.364L848.29,508.259H437.834Z" transform="scale(0.73 0.73) translate(-2 0)" fill="#fff" stroke="none"></path>
+          </clipPath>
+        </defs>
+        <polyline ref="strokeLine" points="0,154 131,0 0,348 269,0 0,562 437,0
+	0,766 565,14 0,1062 719,0 289,1062 843,0 543,1062 995,0 729,1062 1161,0 947,1062 1307,0 1143,1062 1500,162 1299,1062 1500,830" onclick="this.style.strokeDashoffset=20000" clip-path="url(#cut-off)"/>
+<!-- <rect x="1130" y="485" width="100" height="20" fill="white"></rect> -->
+  <!-- <text x="1000" y="500" class="click hint" font-size="30">[ click any yellow area ]</text> -->
+    </svg>
       <h1 class="title">
         <div id="title-line1">
-        <div id="title-unmask">unmask</div>
+        <div id="title-unmask" v-on:click="revealStroke">unmask</div>
         <div id="title-ing">ing</div>
         </div>
         <div id="title-masks">masks</div>
       </h1>
-    <div class="nextButton">
-      <n-link to="/timeline">Next</n-link>
+
+      <!-- <div class="mask">
+      <div class="slide-cover" :style="maskStyle"></div>
+      <div class="slide-arrow"
+            @mouseover="slideLeft = true"
+            ></div>
+      </div> -->
     </div>
-    </div>
+
+<NextButton routerLink="/trend" />
   </div>
 </template>
 
 <script>
+import NextButton from '~/components/NextButton.vue'
 export default{
+    components: {
+      NextButton
+    },
   data(){
     return {
       slideLeft: false,
       maskStyle:{
         marginLeft: "50vw",
-        transition: "0.2s"
+        transition: "2s"
       }
     }
   },
@@ -39,6 +54,12 @@ export default{
       } else {
         this.maskStyle.marginLeft = "50vw"
       }
+    }
+  },
+  method:{
+    revealStroke(){
+      const stroke = this.$refs.strokeLine;
+      stroke.style.strokeDashoffset=20000;
     }
   }
 }
@@ -56,6 +77,7 @@ body{
     font-family: 'Garamond';
     background-repeat: no-repeat;
  }
+
 .bg {
   position: absolute;
   width: 100vw;
@@ -66,44 +88,94 @@ body{
   background-repeat: no-repeat;
   z-index: 0;
 }
+.bg .click-hint{
+  position:absolute;
+  z-index:3;
+  background-color: white;
+  margin-left: 80vw;
+  margin-top:60vh;
+  font-size:40px;
+}
+.bg svg {
+/*   background: #fff; */
+  position: absolute;
+  /* mix-blend-mode: overlay; */
+  z-index:2;
+}
 
+.bg svg polyline {
+  fill: none;
+  stroke: #FBDD4A;
 
+  stroke-width: 200;
+  stroke-dasharray: 20000;
+  stroke-dashoffset: 0;
+  transition: all 3s ease-out;
+}
+.mask{
+  width: 100vw;
+  height: 100vh;
+}
 .slide-cover{
   position:absolute;
   width:50vw;
   height: 100vh;
   /* margin-left:50vw; */
   display: block;
-  background: black;
+  background: #FBDD4A;
   z-index:5;
-  animation: maskout 1s linear infinite alternate ease-in-out;
-   -webkit-animation: maskout 1s linear infinite alternate ease-in-out;
+  transform: scaleX(1);
+  transform-origin: 100% 100%;
+  -webkit-animation: maskout 2s ease-in-out 1s infinite alternate ;
+  animation: maskout 2s ease-in-out 1s infinite alternate ;
+}
+.slide-arrow{
+  display:block;
+  position: absolute;
+  width:50px;
+  height:50px;
+  background-image:url('/direction.png');
+  /* mix-blend-mode: hue; */
+  background-size: contain;
+  background-repeat: no-repeat;
+  margin-left:50vw;
+  margin-top: 80vh;
+  -webkit-animation: wiggle 1s ease-in-out 0s infinite alternate ;
+  animation: wiggle 1s ease-in-out 0s infinite alternate ;
+}
+@-webkit-keyframes wiggle{
+    from {
+      transform: translateX(-60px) scaleX(-1);
+    }
+    to {
+      transform: translateX(-30px) scaleX(-1);
+    }
+}
+@keyframes wiggle{
+  from {
+    transform: translateX(-60px) scaleX(-1);
+  }
+  to {
+    transform: translateX(-30px) scaleX(-1);
+  }
 }
 @-webkit-keyframes maskout{
     from {
-      margin-left: 50vw;
+      transform: scaleX(1);
     }
     to {
-      margin-left: 100vw;
+      transform: scaleX(0.5);
     }
 }
 @keyframes maskout{
     from {
-      margin-left: 50vw;
+      transform: scaleX(1);
     }
     to {
-      margin-left: 100vw;
+      transform: scaleX(0.5);
     }
 }
-.slide-arrow{
-  width:50px;
-  height:50px;
-  background-image:url('/slide.svg');
-  background-size: contain;
-  background-repeat: no-repeat;
-  margin-left:-25px;
-  margin-top: 80vh;
-}
+
 
 
 
@@ -117,7 +189,7 @@ body{
   color: black;
   letter-spacing: 1px;
   line-height: 0.8;
-  z-index:10;
+  z-index:1;
   margin-top: 45vh;
 }
 
@@ -146,24 +218,5 @@ body{
   text-align: left;
   padding-left: 4px;
 }
-.nextButton{
-  display:inline-block;
-  position:absolute;
-  background: #FBDD4A;
-  color: black;
-  font-family:  'Garamond';
-  /* white-space: nowrap; */
-  margin-top: 90vh;
-  margin-left:90vw;
-  z-index:1;
-}
 
-n-link{
-  position: absolute;
-  font-family:  'Garamond';
-  padding: 5px;
-  font-weight: 600;
-  font-size:30px;
-  z-index:1;
-}
 </style>
