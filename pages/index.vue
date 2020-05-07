@@ -134,7 +134,7 @@ body{
   position: absolute;
   width:50px;
   height:50px;
-  background-image:url('/direction.png');
+  background-image:url('./direction.png');
   /* mix-blend-mode: hue; */
   background-size: contain;
   background-repeat: no-repeat;

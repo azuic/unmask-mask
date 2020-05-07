@@ -273,7 +273,7 @@ body{
   font-family:  'Garamond';
   font-weight: 600;
   font-size: 100px;
-  background-image: url('/b.png');
+  background-image: url('./b.png');
   background-size: 150% auto;
   background-repeat: no-repeat;
   background-position: 50% 50%;
@@ -318,7 +318,7 @@ body{
   display: block;
   width: 80px;
   height: 80px;
-  background-image: url("/direction.png");
+  background-image: url("./direction.png");
   background-size: contain;
   background-repeat: no-repeat;
   z-index: 50;
@@ -392,11 +392,11 @@ body{
     height:800px;
   }
   .left{
-    shape-outside: url('/ExcludeL.png');
+    shape-outside: url('./ExcludeL.png');
     float: left;
   }
   .right{
-    shape-outside: url('/ExcludeR.png');
+    shape-outside: url('./ExcludeR.png');
     float: right;
   }
   #law{
