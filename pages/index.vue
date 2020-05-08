@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="bg">
+    <div class="bg-f">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 1062">
         <defs>
           <clipPath id="cut-off">
@@ -78,7 +78,7 @@ body{
     background-repeat: no-repeat;
  }
 
-.bg {
+.bg-f {
   position: absolute;
   width: 100vw;
   height: 100vh;
@@ -88,7 +88,7 @@ body{
   background-repeat: no-repeat;
   z-index: 0;
 }
-.bg .click-hint{
+.bg-f .click-hint{
   position:absolute;
   z-index:3;
   background-color: white;
@@ -96,14 +96,14 @@ body{
   margin-top:60vh;
   font-size:40px;
 }
-.bg svg {
+.bg-f svg {
 /*   background: #fff; */
   position: absolute;
   /* mix-blend-mode: overlay; */
   z-index:2;
 }
 
-.bg svg polyline {
+.bg-f svg polyline {
   fill: none;
   stroke: #FBDD4A;
 

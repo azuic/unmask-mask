@@ -4,11 +4,11 @@
     <div id="title">
     <div id="pro-title" v-on:click="slideRight">
       <span class="title-text"  @mouseover="hoverPro" @mouseleave="hoverPro">pro</span>
-      <img class="direction" src="/direction-w.png" width="50px"
+      <img class="direction" src="~assets/direction-w.png" width="50px"
             v-show="proActive&&!sectionDisplayed" :style="directionTranslate"/>
     </div>
     <div id="anti-title" v-on:click="slideLeft">
-      <img class="direction" src="/direction.png" width="50px"
+      <img class="direction" src="~assets/direction.png" width="50px"
             v-show="antiActive&&!sectionDisplayed" :style="directionTranslate"/>
       <span class="title-text"  @mouseover="hoverAnti" @mouseleave="hoverAnti">anti</span>
     </div>
@@ -155,14 +155,11 @@
         }
       },
       selectYear(val, oldVal){
-        console.log(val);
         if (this.slide==="left"){
           this.details = anti_mask_laws.filter(yearData=>(yearData.year==val))[0].content[0];
         } else if (this.slide==="right"){
           this.details = pro_mask_policy.filter(yearData=>(yearData.year==val))[0].content[0];
         }
-
-        console.log(this.details[0]);
         this.isSelected=true;
       }
     },
