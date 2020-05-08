@@ -17,7 +17,7 @@ export default {
 
 @font-face {
   font-family: 'Garamond',cursive;
-  src: url('/Garamond.ttf') format('truetype');
+  src: url('~assets/Garamond.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
@@ -33,7 +33,7 @@ export default {
 }
 
 .back-button:hover{
-  background-image:url('/static/turnLeft.gif');
+  background-image:url('~assets/turnLeft.gif');
   background-size: 120% 120%;
   background-position: 50% 50%;
   background-repeat: no-repeat;

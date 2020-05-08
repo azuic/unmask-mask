@@ -63,7 +63,7 @@ html,body{
   padding-bottom: 20px;
 }
 .bg-container{
-  background-image: url('/static/b.png');
+  background-image: url('~assets/b.png');
   background-size: 150% auto;
   background-repeat: no-repeat;
   background-position: 50% 50%;
@@ -74,7 +74,7 @@ html,body{
   display:block;
   position:absolute;
   z-index:-1;
-  background-image: url('/static/b.png');
+  background-image: url('~assets/b.png');
   background-size: contain;
   background-repeat: no-repeat;
   width: 800px;

@@ -47,7 +47,7 @@ export default{
 <style>
 @font-face {
   font-family: 'Garamond',cursive;
-  src: url('/Garamond.ttf') format('truetype');
+  src: url('~assets/Garamond.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
@@ -79,7 +79,7 @@ body{
   position: absolute;
   width: 100vw;
   height: 100vh;
-  background-image: url('/static/b.png');
+  background-image: url('~assets/b.png');
   background-size: 150% auto;
   background-repeat: no-repeat;
   background-position: 50% 50%;
