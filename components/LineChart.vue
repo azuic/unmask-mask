@@ -130,7 +130,10 @@
           .domain([0, d3.max(data, d => d.value)]).nice()
           .range([this.height - this.margin.bottom, this.margin.top]);
 
-        const xAxis = d3.axisBottom(x).ticks(this.width / 80).tickSizeOuter(0);
+        const xAxis = d3.axisBottom(x)
+          .ticks(this.width / 80)
+          .tickSizeOuter(0);
+
         const yAxis = d3.axisLeft(y);
 
         // const line = d3.line()

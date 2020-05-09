@@ -55,16 +55,21 @@
       </g>
     </svg>
     <div :style="showDetails" class="details">
-      <span class="stateName" :style="{'color':fillColor}">{{details.state}}</span>
-      <br><br>
       <div class="text-info">
-      <!-- <div id="context" v-html="details.context"></div> -->
+        <div id="context" v-if="slide==='right'">
+          <div class="statename-container"><span class="stateName" :style="{'color':fillColor}">{{details.state}}</span></div>
+          <div id="context-info" v-html="details.context"></div>
+        </div>
       <div id="law">
         <div class="left"></div>
         <div class="right"></div>
+        <br>
         <p v-html="details.law"></p>
       </div>
-      <div id="context" v-html="details.context"></div>
+      <div id="context" v-if="slide==='left'">
+        <div class="statename-container"><span class="stateName" :style="{'color':fillColor}">{{details.state}}</span></div>
+        <div id="context-info" v-html="details.context"></div>
+      </div>
       </div>
     </div>
   </div>
@@ -105,7 +110,8 @@
           transition: "0.2s"
         },
         showDetails:{
-          display: "hidden"
+          display: "hidden",
+          marginLeft: "578px"
         },
         offsetX:200,
         offsetY:120,
@@ -134,6 +140,7 @@
           this.backStyle= {
             marginLeft:"80vw",
             transform: "scaleX(1)"};
+          this.showDetails.marginLeft="162px";
         } else if (val==="left"){
           this.slideStyle.marginLeft="-80vw";
           this.fillColor="#A6330A";
@@ -143,6 +150,7 @@
           this.backStyle= {
             marginLeft:"15vw",
             transform: "scaleX(-1)"};
+          this.showDetails.marginLeft="578px";
         } else {
           this.slideStyle.marginLeft="0";
           this.notCenter = true;
@@ -360,8 +368,8 @@ body{
   .details{
     position: absolute;
     display: block;
-    margin-left: 600px;
-    margin-top: 270px;
+    margin-left: 578px;
+    margin-top: 130px;
     width: 600px;
     /* height: 300px; */
     z-index:1;
@@ -370,23 +378,32 @@ body{
     background-color: #A6330A;
     color: white;
   }
+
+  .statename-container{
+    /* margin-left: 300px; */
+    margin-top: 20px;
+    position: absolute;
+    /* z-index: 3; */
+    width: 300px;
+  }
+
   .stateName{
-    font-size: 28px;
+    font-size: 40px;
     color: #A6330A;
-    /* text-decoration: underline; */
+    line-height: 60px;
     border-bottom-width: 4px;
     border-bottom-style: solid;
     padding-bottom: 3px;
-    margin-left: 100px;
   }
   .text-info{
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-gap: 120px;
+    margin-top: 50px;
   }
   .left, .right{
-    width:200px;
-    height:800px;
+    width:350px;
+    height:750px;
   }
   .left{
     shape-outside: url('~assets/ExcludeL.png');
@@ -398,9 +415,9 @@ body{
   }
   #law{
     /* display: block; */
-    font-size: 22px;
-    line-height: 33px;
-    width: 740px;
+    font-size: 26px;
+    line-height: 39px;
+    width: 760px;
 
   }
   #context{
@@ -409,7 +426,10 @@ body{
     display: block;
     width: 300px;
     padding-top: 70px;
+  }
 
+  #context-info{
+    margin-top:  100px;
   }
   .nextButton{
     display:inline-block;
