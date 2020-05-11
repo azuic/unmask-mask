@@ -45,9 +45,11 @@
     <div :style="showDetails" class="details">
       <div class="text-info">
         <div id="context" v-if="slide==='right'">
-          <div class="statename-container"><span class="stateName" :style="{'color':fillColor}" v-html="details.state"></span></div>
+          <div class="statename-container">
+            <span class="stateName" :style="{'color':fillColor}" v-html="details.state"></span>
+          </div>
           <div id="context-info" v-html="details.context"></div>
-          <div v-if="yr==2020" style="background-image:ulr('~assets/2020mask.png')"></div>
+          <div id="map-img-2020" v-if="selectYear==2020"></div>
         </div>
         <div id="law">
           <div class="left"></div>
@@ -57,17 +59,18 @@
         </div>
         <div id="context" v-if="slide==='left'">
           <div class="statename-container"><span class="stateName" :style="{'color':fillColor}" v-html="details.state">{{}}</span></div>
-          <div id="context-info" v-html="details.context"><div v-if="yr==2020" style="background-image:ulr('~assets/antimask.png')"></div>
+          <div id="context-info" v-html="details.context"></div>
+          <div id="map-img-anti"></div>
         </div>
       </div>
     </div>
   </div>
 
-  <BackButton routerLink="/trend" v-show="!sectionDisplayed" />
-  <NextButton routerLink="/beyond" v-show="!sectionDisplayed" />
+    <BackButton routerLink="/trend" v-show="!sectionDisplayed" />
+    <NextButton routerLink="/beyond" v-show="!sectionDisplayed" />
 
-  <div id="timeline-title" v-show="!sectionDisplayed"><span style="background-color:#FFF">laws and policies</span> about masks</div>
-</div>
+    <div id="timeline-title" v-show="!sectionDisplayed"><span style="background-color:#FFF">laws and policies</span> about masks</div>
+  </div>
 </template>
 
 <script>
@@ -88,14 +91,14 @@ export default {
   data() {
     return {
       antiISO: {},
-      currentISO1:"",
-      currentISO2:"",
+      currentISO1: "",
+      currentISO2: "",
       fills: {
         "exist": "#edc7b9",
         "current": "#A6330A",
         defaultFill: "fff"
       },
-      mapKey:100,
+      mapKey: 100,
       geographyConfig: {
         dataUrl: '//raw.githubusercontent.com/Seungwoo321/vue-datamaps/master/demo/example-vue-cli3/public/data/world.json',
         popupOnHover: false,
@@ -186,9 +189,9 @@ export default {
       if (this.slide === "left") {
         this.details = anti_mask_laws.filter(yearData => (yearData.year == val))[0].content[0];
         let currentISOs = anti_mask_laws.filter(yearData => (yearData.year == val))[0].iso;
-        this.currentISO1=currentISOs[0];
-        if(currentISOs.length===2){
-          this.currentISO2=currentISOs[1];
+        this.currentISO1 = currentISOs[0];
+        if (currentISOs.length === 2) {
+          this.currentISO2 = currentISOs[1];
         }
         // currentISOs.forEach(iso=>this.antiISO[iso].fillKey="current");
         // this.antiISO={}
@@ -199,8 +202,8 @@ export default {
     }
   },
   methods: {
-    forceRerender(){
-      this.mapKey+=1;
+    forceRerender() {
+      this.mapKey += 1;
     },
     hoverAnti() {
       this.antiActive = !this.antiActive;
@@ -499,6 +502,20 @@ body {
   margin-top: 100px;
 }
 
+#map-img-2020{
+  background-image: url('~assets/2020mask.png');
+  height:200px;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+#map-img-anti{
+  background-image: url('~assets/antimask.png');
+  height:200px;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
 .nextButton {
   display: inline-block;
   position: absolute;

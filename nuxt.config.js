@@ -5,10 +5,10 @@
 // } : {}
 export default {
   mode: 'spa',
-  // router: {
-  //   base: 'https://azuic.github.io/unmasking-masks/',
-  //   mode: 'hash'
-  // },
+  router: {
+    base: 'https://azuic.github.io/unmasking-masks/',
+    mode: 'hash'
+  },
   /*
   ** Headers of the page
   */
