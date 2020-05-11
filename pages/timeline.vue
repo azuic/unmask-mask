@@ -508,6 +508,8 @@ body {
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
+  margin-top:30px;
+
 }
 #map-img-anti{
   background-image: url('~assets/antimask.png');
@@ -515,6 +517,7 @@ body {
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
+  margin-top:30px;
 }
 .nextButton {
   display: inline-block;

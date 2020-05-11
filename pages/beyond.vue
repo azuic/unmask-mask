@@ -1,5 +1,18 @@
 <template>
 <div>
+  <div class="timeline-mask" :style="slideStyle">
+    <div id="title">
+      <div id="pro-title" v-on:click="slideRight">
+        <span class="title-text" @mouseover="hoverPro" @mouseleave="hoverPro">norm</span>
+        <img class="direction" src="~assets/direction-w.png" width="50px" v-show="proActive&&!sectionDisplayed" :style="directionTranslate" />
+      </div>
+      <div id="anti-title" v-on:click="slideLeft">
+        <img class="direction" src="~assets/direction.png" width="50px" v-show="antiActive&&!sectionDisplayed" :style="directionTranslate" />
+        <span class="title-text" @mouseover="hoverAnti" @mouseleave="hoverAnti">stigma</span>
+      </div>
+    </div>
+
+  </div>
   <div class="bg"></div>
   <h1 class="section-title">
     <div class="row-section"></div>
