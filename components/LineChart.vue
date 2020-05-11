@@ -147,6 +147,8 @@
 
         svg.append("g")
          .attr("class","xAxis")
+         .style("font-size","22px")
+         .style("font-family","Garamond")
          .attr("transform", `translate(0, ${this.height-this.margin.bottom})`)
          .call(xAxis);
 

@@ -94,10 +94,10 @@ body {
 .bg-f {
   position: absolute;
   width: 100vw;
-  height: 100vh;
+  height: 56.25vw;
   background-image: url('~assets/mask-front.png');
   background-size: contain;
-  background-position: center;
+  background-position: 50% 0%;
   background-repeat: no-repeat;
   /* z-index: 0; */
 }
@@ -140,7 +140,7 @@ body {
   letter-spacing: 1px;
   line-height: 0.8;
   z-index: 1;
-  margin-top: 45vh;
+  margin-top: 25.3vw;
 }
 
 #title-line1 {

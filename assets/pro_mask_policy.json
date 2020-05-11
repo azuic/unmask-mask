@@ -2,21 +2,21 @@
   "year": 2002,
   "content": [{
     "state": "SARS",
-    "law": "",
-    "context": ""
+    "law": "WHO: Masks are only <span class=\"hightlight\" style=\"background-color:#544E70;color:white;font-size:60;\">recommended</span> for <span class=\"hightlight\" style=\"background-color:#544E70;color:white;font-size:60;\">patients</span>, those handling <span class=\"hightlight\" style=\"background-color:#544E70;color:white;font-size:60;\">SARS specimens</span> or those <span class=\"hightlight\" style=\"background-color:#544E70;color:white;font-size:60;\">caring</span> for SARS cases.",
+    "context": "Largely influenced Asian, and cultivated the <span class=\"hightlight\" style=\"background-color:#544E70;color:white;font-size:60;\">Asian mask culture</span>, especially East Asian, since then."
   }]
 },  {
     "year": 2009,
     "content": [{
       "state": "H1N1",
-      "law": "",
+      "law": "United States CDC: Only persons at <span class=\"hightlight\" style=\"background-color:#544E70;color:white;font-size:60;\">increased risk of severe illness</span> with H1N1 in community and in unavoidable crowded setting, <span class=\"hightlight\" style=\"background-color:#544E70;color:white;font-size:60;\">caregivers</span> to person with influenza-like illness, or <span class=\"hightlight\" style=\"background-color:#544E70;color:white;font-size:60;\">health care workers</span> caring for persons with known, probable or suspected 2009 H1N1 or influenza-like illness are <span class=\"hightlight\" style=\"background-color:#544E70;color:white;font-size:60;\">recommended wearing</span> facemasks/respirators. ",
       "context": ""
     }]
   },  {
       "year": 2020,
       "content": [{
         "state": "Covid-19",
-        "law": "<span class=\"hightlight\" style=\"background-color:#544E70;color:white;\">63 states</span> require/recommend residents to cover their faces when they go out in public or use public transportation - <span class=\"hightlight\" style=\"background-color:#544E70;color:white;\">United States</span>: Connecticut, Hawaii, Maryland, New Jersey, New York, Pennsylvania, Rhode Island;  Argentina; Austria; Bahamas; Bahrain; Benin; Bosnia and Herzegovina; Bulgaria; Cambodia; Cameroon; <span class=\"hightlight\" style=\"background-color:#544E70;color:white;\">Canada</span>; Chile; China; Colombia; Cuba; Czech Republic; DR Congo; Ecuador; Ethiopia; <span class=\"hightlight\" style=\"background-color:#544E70;color:white;\">France</span>; Gabon; <span class=\"hightlight\" style=\"background-color:#544E70;color:white;\">Germany</span>; Guinea; Hoduras; <span class=\"hightlight\" style=\"background-color:#544E70;color:white;\">Hong Kong</span>; India; Indonesia; Israel; <span class=\"hightlight\" style=\"background-color:#544E70;color:white;\">Italy</span>; Ivory Coast; Japan; Kenya; Liberia; Lituania; Luxembourg; Malaysia; Mexico; Mongolia; Morocco; Mozambique; North Macedonia; Pakistan; Panama; Peru; Philippines; Poland; <span class=\"hightlight\" style=\"background-color:#544E70;color:white;\">Russia</span>; Rwanda; Scotland; Singapore; <span class=\"hightlight\" style=\"background-color:#544E70;color:white;\">Spain</span>; Slovakia; Slovenia; South Africa; South Korea; Sweden; Taiwan; Turkey; <span class=\"hightlight\" style=\"background-color:#544E70;color:white;\">Ukraine</span>; Uzbekistan; Venezuela; Vietnam; Zambia.",
-        "context": ""
+        "law": "Moslty since April (some earlier), <span class=\"hightlight\" style=\"background-color:#544E70;color:white;font-size:60;\">98</span> regions and countries <span class=\"hightlight\" style=\"background-color:#544E70;color:white;font-size:60;\">require</span> (some partly require) residents to wear masks when they go out in public (public transportation and/or essential businesses or everywhere). <span class=\"hightlight\" style=\"background-color:#544E70;color:white;font-size:60;\">34</span> regions and countries <span class=\"hightlight\" style=\"background-color:#544E70;color:white;font-size:60;\">recommend</span> to do so. <span class=\"hightlight\" style=\"background-color:#544E70;color:white;font-size:60;\"> Japan and South Korea</span> does not have complusory requirement but both have <span class=\"hightlight\" style=\"background-color:#544E70;color:white;font-size:60;\">universal</span> mask usage.",
+        "context": "Among all the 17 countries and regions where <span class=\"hightlight\" style=\"background-color:#544E70;color:white;font-size:60;\">anti-mask</span> law ever existed, <span class=\"hightlight\" style=\"background-color:#544E70;color:white;font-size:60;\">Hong Kong</span> government <span class=\"hightlight\" style=\"background-color:#544E70;color:white;font-size:60;\">recommended</span> mask wearing, and all the other <span class=\"hightlight\" style=\"background-color:#544E70;color:white;font-size:60;\">14 countries</span> except United Kingdom, Norway, and Sweden have <span class=\"hightlight\" style=\"background-color:#544E70;color:white;font-size:60;\">required</span> mask wearing in public."
       }]
     }]

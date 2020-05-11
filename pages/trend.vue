@@ -3,7 +3,7 @@
     <!-- <div class="mask-back"></div> -->
     <LineChart id="volume-line-chart" :selectedStartDate="pickStartDate"/>
     <div class="date-range">
-      <el-radio-group v-model="pickStartDate" size="medium" @change="newStartDate">
+      <el-radio-group v-model="pickStartDate" size="large" @change="newStartDate">
         <el-radio-button label="Since 2017"></el-radio-button>
         <el-radio-button label="Since 2018"></el-radio-button>
         <el-radio-button label="Since 2019 Hongkong Protest"></el-radio-button>
@@ -49,14 +49,14 @@ html,body{
 #trend-title{
   display: block;
   position: absolute;
-  width: 530px;
-  font-size: 40px;
+  width: 33vw;
+  font-size: 2.5vw;
   /* background-color: #FBDD4A; */
   border-color:#FBDD4A;
   border-bottom-width: 10px;
   border-bottom-style: solid;
   padding-bottom: 7px;
-  margin-top: 80vh;
+  margin-top: 46vw;
   margin-left: 10vw;
   font-weight:700;
   padding-top: 20px;
@@ -67,8 +67,8 @@ html,body{
   background-size: 150% auto;
   background-repeat: no-repeat;
   background-position: 50% 50%;
-  width:100vw;
-  height: 100vh;
+  width: 100vw;
+  height: 56.25vw;
 }
 .mask-back{
   display:block;
@@ -99,7 +99,7 @@ html,body{
   display: block;
   position: absolute;
   z-index: 2;
-  margin-top: 10vh;
+  margin-top: 5.625vw;
   margin-left: 8vw;
   width: 80vw;
 }
@@ -107,9 +107,11 @@ html,body{
   .date-range{
     position: absolute;
     display: block;
-    margin-left: 60vw;
-    margin-top: 85vh;
+    margin-left: 55vw;
+    margin-top: 49vw;
     z-index:50;
+    font-size: 22px;
+    font-family: "Garamond";
   }
 
   .el-radio-button__inner {
@@ -130,7 +132,7 @@ html,body{
     -webkit-transition: all .3s cubic-bezier(.645, .045, .355, 1);
     transition: all .3s cubic-bezier(.645, .045, .355, 1);
     padding: 12px 20px;
-    font-size: 14px;
+    font-size: 22px;
     border-radius: 0
   }
 
