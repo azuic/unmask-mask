@@ -60,7 +60,7 @@
         <div id="context" v-if="slide==='left'">
           <div class="statename-container"><span class="stateName" :style="{'color':fillColor}" v-html="details.state">{{}}</span></div>
           <div id="context-info" v-html="details.context"></div>
-          <div id="map-img-anti"></div>
+          <div id="map-img-anti" v-if="selectYear!==null"></div>
         </div>
       </div>
     </div>
@@ -175,7 +175,6 @@ export default {
         this.showDetails.marginLeft = "578px";
       } else {
         this.slideStyle.marginLeft = "0";
-        this.notCenter = true;
         this.sectionDisplayed = false;
         this.details = {
           state: "",
@@ -252,9 +251,6 @@ export default {
       } else {
         return 5;
       }
-    },
-    detailsOfYear(yr) {
-      details
     }
   },
   mounted() {

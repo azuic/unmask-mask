@@ -1,48 +1,137 @@
 <template>
 <div>
-  <div class="timeline-mask" :style="slideStyle">
+  <div class="bg"></div>
+  <div class="culture-mask" :style="swipeStyle">
     <div id="title">
-      <div id="pro-title" v-on:click="slideRight">
-        <span class="title-text" @mouseover="hoverPro" @mouseleave="hoverPro">norm</span>
-        <img class="direction" src="~assets/direction-w.png" width="50px" v-show="proActive&&!sectionDisplayed" :style="directionTranslate" />
+      <div id="pro-title" v-on:click="swipeRight">
+        <span class="title-text" @mouseover="hoverNorm" @mouseleave="hoverNorm">norm</span>
       </div>
-      <div id="anti-title" v-on:click="slideLeft">
-        <img class="direction" src="~assets/direction.png" width="50px" v-show="antiActive&&!sectionDisplayed" :style="directionTranslate" />
-        <span class="title-text" @mouseover="hoverAnti" @mouseleave="hoverAnti">stigma</span>
+      <div id="anti-title" v-on:click="swipeLeft">
+        <span class="title-text" @mouseover="hoverStigma" @mouseleave="hoverStigma" style="text-decoration:none;">stigma</span>
       </div>
     </div>
-
   </div>
-  <div class="bg"></div>
+
+
   <h1 class="section-title">
     <div class="row-section"></div>
-    <div class="row-section hoverable" v-for="(each,id) in sections" :key="id">{{each}}</div>
-
+    <div class="row-section hoverable" v-for="(each,id) in sections" :key="id" :style="rowStyle" v-on:click="showMore(each,id)">{{each}}</div>
+    <div class="row-section hoverable" v-on:click="swipe='center'" :style="rowStyle">{{arrow}}</div>
   </h1>
+<div class="infoCard" :style="infoStyle" v-if="sectionSelected">{{moreInfo}}</div>
   <BackButton routerLink="/timeline" />
+  <NextButton routerLink="/end"/>
+      <div id="center-title" v-show="!sectionTextDisplayed"> ... and when they <span style="background-color:#FFF">come closer</span></div>
 </div>
 </template>
 
 <script>
-import BackButton from '~/components/BackButton.vue'
+import BackButton from '~/components/BackButton.vue';
+import NextButton from '~/components/NextButton.vue';
 export default {
   components: {
-    BackButton
+    BackButton,NextButton
   },
   data() {
     return {
-      slideLeft: false,
+      infoStyle:{
+        marginLeft:"70vw",
+        marginTop:"20vh"
+      },
+      moreInfo:"",
+      sectionSelected:false,
       revealStyle: {
         backgroundColor: "#FBDD4A",
         transition: "2s"
       },
       isHover: false,
       info: [],
-      sections: ["social firewall", "fashion statement", "pop culture", "..."]
+      sections: [],
+      swipe: "center",
+      swipeStyle: {
+        marginLeft: 0,
+        transition: "0.2s"
+      },
+      normActive: false,
+      stigmaActive: false,
+      sectionTextDisplayed: false,
+      arrow:"",
+      rowStyle:{
+        paddingLeft:"5vw",
+        textAlign:"left",
+        paddingRight:"0",
+        marginTop:"20vh"
+      },
+      infos:{
+        "filter & warmth":"to prevent smog, pollen allergy, smell in packed crowds, or to stay warm in winter",
+        "social firewall":"to avoid interaction with others, or to hide one's face if no-make-up",
+        "fashion statement":"e.g. the smog couture, marine serre's futurewear collection",
+        "disease":"traditionally only severely sick patients wear masks",
+         "danger":"hidden identity for crimes/riots",
+         "alien":"local people never wear masks"
+      },
+      currentIndex:0
     }
   },
-
-  method: {
+  watch: {
+    swipe(val, oldVal) {
+      if (val === "right") {
+        this.swipeStyle.marginLeft = "100vw";
+        this.normActive = true;
+        this.sectionTextDisplayed = true;
+        this.sections=["filter & warmth","social firewall", "fashion statement"];
+        this.arrow="→";
+        this.rowStyle={
+          paddingLeft:"5vw",
+          textAlign:"left",
+          paddingRight:"0"
+        };
+        this.infoStyle.marginLeft="70vw";
+      } else if (val === "left") {
+        this.swipeStyle.marginLeft = "-100vw";
+        this.stigmaActive = true;
+        this.sectionTextDisplayed = true;
+        this.sections=["disease", "danger","alien"];
+        this.arrow="←";
+        this.rowStyle={
+          paddingLeft:"0",
+          textAlign:"right",
+          paddingRight:"5vw"
+        };
+        this.infoStyle.marginLeft="35vw";
+      } else {
+        this.swipeStyle.marginLeft = "0";
+        this.sectionTextDisplayed = false;
+        this.sections=[];
+        this.arrow="";
+        this.sectionSelected=false;
+      }
+    }
+  },
+  methods: {
+    showMore(section,id){
+      this.sectionSelected=true;
+      this.moreInfo=this.infos[section];
+      this.infoStyle.marginTop=id*20+20+"vh";
+    },
+    hoverStigma() {
+      this.stigmaActive = !this.stigmaActive;
+    },
+    hoverNorm() {
+      this.normActive = !this.normActive;
+    },
+    swipeCenter() {
+      this.swipe = "center";
+      this.sectionTextDisplayed = false;
+    },
+    swipeRight() {
+      this.swipe = "right";
+      this.sectionTextDisplayed = true;
+    },
+    swipeLeft() {
+      this.swipe = "left";
+      this.sectionTextDisplayed = true;
+    },
     revealText() {
       this.revealStyle.backgroundColor = "none";
       this.info = ["privacy and safety zone", "marine serre and smog couture", "BTS etc."];
@@ -69,6 +158,33 @@ body {
   background-repeat: no-repeat;
 }
 
+.infoCard{
+  position:absolute;
+  z-index:15;
+  margin-top: 20vh;
+  width: 520px;
+  background-color: white;
+  font-size: 36px;
+  line-height: 54px;
+  padding-left: 20px;;
+}
+.culture-mask {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+
+  display: block;
+  background: #FBDD4A;
+  z-index: 25;
+  font-family: 'Garamond';
+  font-weight: 600;
+  font-size: 100px;
+  /* background-image: url('~assets/b.png'); */
+  background-size: 150% auto;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  /* background-blend-mode: multiply; */
+}
 .back-button {
   position: absolute;
   z-index: 55;
@@ -100,7 +216,25 @@ body {
   background-size: 150% auto;
   background-repeat: no-repeat;
   background-position: 50% 50%;
-  z-index: 0;
+  z-index: -2;
+}
+
+#center-title{
+  display: block;
+  position: absolute;
+  z-index: 90;
+  width: 33vw;
+  font-size: 2.5vw;
+  /* background-color: #FBDD4A; */
+  border-color: #FFF;
+  border-bottom-width: 10px;
+  border-bottom-style: solid;
+  padding-bottom: 7px;
+  margin-top: 23vw;
+  margin-left: 35vw;
+  font-weight: 700;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 
 .section-title {
@@ -113,7 +247,7 @@ body {
   color: black;
   letter-spacing: 1px;
   line-height: 0.8;
-  z-index: 1;
+  z-index: -2;
 }
 
 #title-line1 {
