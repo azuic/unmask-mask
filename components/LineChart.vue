@@ -223,18 +223,7 @@
       }
     },
     mounted() {
-      // this.data=volume_intensity.map(({Date,VolumnIntensity})=>(
-      //   {date: this.formatDate(Date), value: VolumnIntensity*100}
-      // ))
-      // const svgDOM = this.$refs.svgLineChart;
-      //
-      //
-      // this.svg = d3.select(svgDOM)
-      //   .attr("width", '100%')
-      //   .attr("height", this.height)
-      //   .attr("viewBox",[0,0,this.width,this.height]);
       this.createChart();
-      // console.log(this.selectedStartDate);
     }
 
   }

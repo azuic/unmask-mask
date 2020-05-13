@@ -18,7 +18,7 @@
     <div class="row-section hoverable" v-for="(each,id) in sections" :key="id" :style="rowStyle" v-on:click="showMore(each,id)">{{each}}</div>
     <div class="row-section hoverable" v-on:click="swipe='center'" :style="rowStyle">{{arrow}}</div>
   </h1>
-<div class="infoCard" :style="infoStyle" v-if="sectionSelected">{{moreInfo}}</div>
+<div class="infoCard" :style="infoStyle" v-if="sectionSelected" v-html="moreInfo"></div>
   <BackButton routerLink="/timeline" />
   <NextButton routerLink="/end"/>
       <div id="center-title" v-show="!sectionTextDisplayed"> ... and when they <span style="background-color:#FFF">come closer</span></div>
@@ -63,12 +63,12 @@ export default {
         marginTop:"20vh"
       },
       infos:{
-        "filter & warmth":"to prevent smog, pollen allergy, smell in packed crowds, or to stay warm in winter",
-        "social firewall":"to avoid interaction with others, or to hide one's face if no-make-up",
-        "fashion statement":"e.g. the smog couture, marine serre's futurewear collection",
-        "disease":"traditionally only severely sick patients wear masks",
-         "danger":"hidden identity for crimes/riots",
-         "alien":"local people never wear masks"
+        "filter & warmth":"to prevent <span class=\"hightlight\" style=\"background-color:#FBDD4A;\">smog</span>, <span class=\"hightlight\" style=\"background-color:#FBDD4A;\">dust</span>, pollen <span class=\"hightlight\" style=\"background-color:#FBDD4A;\">allergy</span>, <span class=\"hightlight\" style=\"background-color:#FBDD4A;\">smells</span> in packed crowds, or to <span class=\"hightlight\" style=\"background-color:#FBDD4A;\">stay warm</span> in winter",
+        "social firewall":"to <span class=\"hightlight\" style=\"background-color:#FBDD4A;\">avoid interaction</span> with others, or to hide one's face if <span class=\"hightlight\" style=\"background-color:#FBDD4A;\">no-make-up</span>",
+        "fashion statement":"e.g. the <span class=\"hightlight\" style=\"background-color:#FBDD4A;\">smog couture</span>, <span class=\"hightlight\" style=\"background-color:#FBDD4A;\">marine serre</span>'s futurewear collection",
+        "disease":"traditionally only severely sick <span class=\"hightlight\" style=\"background-color:#FBDD4A;\">patients</span> wear masks",
+         "danger":"to hide identity for abnormal purposes (usually bad) <span class=\"hightlight\" style=\"background-color:#FBDD4A;\">crimes/riots</span>",
+         "alien":"people in <span class=\"hightlight\" style=\"background-color:#FBDD4A;\">western</span> countries almost <span class=\"hightlight\" style=\"background-color:#FBDD4A;\">never</span> wear masks on a <span class=\"hightlight\" style=\"background-color:#FBDD4A;\">daily base</span>"
       },
       currentIndex:0
     }

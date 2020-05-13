@@ -49,7 +49,7 @@
             <span class="stateName" :style="{'color':fillColor}" v-html="details.state"></span>
           </div>
           <div id="context-info" v-html="details.context"></div>
-          <div id="map-img-2020" v-if="selectYear==2020"></div>
+          <div id="map-img-2020" v-if="selectYear==2020" ><div style="padding-top:150px; padding-left:50px;color:#544E70;" ><div class="map-hint" v-on:click="showMap2020">[click to view map]</div></div></div>
         </div>
         <div id="law">
           <div class="left"></div>
@@ -60,12 +60,18 @@
         <div id="context" v-if="slide==='left'">
           <div class="statename-container"><span class="stateName" :style="{'color':fillColor}" v-html="details.state">{{}}</span></div>
           <div id="context-info" v-html="details.context"></div>
-          <div id="map-img-anti" v-if="selectYear!==null"></div>
+          <div id="map-img-anti" v-if="selectYear!==null" ><div style="padding-top:200px; padding-left:50px;color:#A6330A;"><div class="map-hint" v-on:click="showMapAnti">[click to view map]</div></div></div>
         </div>
       </div>
     </div>
-  </div>
 
+  </div>
+  <div class="map-view" v-if="slide!=='center'" v-on:click="closeMap">
+
+    <img class="map-img" style="margin-left:-10vw;" v-if="map2020" src="~assets/pro2020.png"/>
+    <img class="map-img" style="margin-left:8vw;" v-if="mapAnti" src="~assets/anti.png"/>
+        <div id="close-img" v-on:click="closeMap" v-if="map2020||mapAnti"><span>[close]</span></div>
+  </div>
     <BackButton routerLink="/trend" v-show="!sectionDisplayed" />
     <NextButton routerLink="/beyond" v-show="!sectionDisplayed" />
 
@@ -90,6 +96,8 @@ export default {
   },
   data() {
     return {
+      map2020:false,
+      mapAnti:false,
       antiISO: {},
       currentISO1: "",
       currentISO2: "",
@@ -182,6 +190,8 @@ export default {
           context: ""
         };
         this.selectYear = null;
+        this.map2020=false;
+        this.mapAnti=false;
       }
     },
     selectYear(val, oldVal) {
@@ -201,6 +211,19 @@ export default {
     }
   },
   methods: {
+    showMap2020(){
+      this.map2020=true;
+    },
+    showMapAnti(){
+      this.mapAnti=true;
+    },
+    closeMap(){
+      this.map2020=false;
+      this.mapAnti=false;
+    },
+    toggleView(){
+      this.viewToggled=!this.viewToggled;
+    },
     forceRerender() {
       this.mapKey += 1;
     },
@@ -498,6 +521,17 @@ body {
   margin-top: 100px;
 }
 
+.map-hint{
+  width: 200px;
+}
+.map-hint:hover{
+  border-bottom-width: 3px;
+  border-bottom-style: solid;
+  padding-bottom: 4px;
+  position:absolute;
+  z-index:24;
+  background-color: white;
+}
 #map-img-2020{
   background-image: url('~assets/2020mask.png');
   height:200px;
@@ -514,6 +548,33 @@ body {
   background-position: center;
   background-repeat: no-repeat;
   margin-top:30px;
+}
+#close-img{
+  position:absolute;
+  z-index:24;
+  font-size:30px;
+  /* height:40px; */
+  width: 90vw;
+  text-align:center;
+  padding-top:90vh;
+  opacity:0.5;
+}
+
+.map-img{
+  position: absolute;
+  z-index:23;
+  width: 90vw;
+  margin-top:0;
+  background-color: white;
+}
+.map-view{
+  position: abosolute;
+  padding-left:100px;
+  /* margin-top:250px */
+  /* padding-top: 75px; */
+  width:100px;
+
+  background-color:white;
 }
 .nextButton {
   display: inline-block;
